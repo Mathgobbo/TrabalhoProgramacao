@@ -17,22 +17,27 @@ window.onload = readData();
 // Função para inserir Dados
 function insertData() {
 
-    fetch('http://localhost/ag2/server/insert.php', {
-        method: 'post',
-        body: new FormData(document.querySelector('#formInsert'))
-
-    }).then((res) => {
-        if (res.status >= 200 && res.status < 300) {
-            return res.text()
-        }
-        throw new Error(response.statusText)
-
-    }).then(response => {
-        console.log(response)
-        readData();
-    }).catch(err => {
-        console.log(err)
-    })
+    if($('.col-md-0').length >= 10){
+        alert("Número Máximo de Registros Cadastrados!")
+    }else{
+        fetch('http://localhost/TrabalhoProgramacao-master/TrabalhoProgramacao/AgendaSticker/server/insert.php', {
+            method: 'post',
+            body: new FormData(document.querySelector('#formInsert'))
+    
+        }).then((res) => {
+            if (res.status >= 200 && res.status < 300) {
+                return res.text()
+            }
+            throw new Error(response.statusText)
+    
+        }).then(response => {
+            console.log(response)
+            readData();
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+    
 
 }
 
@@ -41,7 +46,7 @@ function insertData() {
 function readData() {
     
     document.querySelector('.row').innerHTML = '';
-    fetch('http://localhost/ag2/server/select.php', {
+    fetch('http://localhost/TrabalhoProgramacao-master/TrabalhoProgramacao/AgendaSticker/server/select.php', {
         method: 'get'
     })
         .then((res) => {
@@ -77,7 +82,7 @@ function deleteData(id2){
     var fd = new FormData();
     for(var id in data){ fd.append(id, data[id]);}
    
-    fetch('http://localhost/ag2/server/delete.php',{
+    fetch('http://localhost/TrabalhoProgramacao-master/TrabalhoProgramacao/AgendaSticker/server/delete.php',{
         method: 'post',
         body: fd
     }).then(res=>{
