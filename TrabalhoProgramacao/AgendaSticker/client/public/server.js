@@ -1,10 +1,15 @@
 // Atribuindo as Funções
+
+// Ebnviar registro
 document.querySelector('#submit').addEventListener('click', () => {
-
-    insertData();
-    readData();
-
+    insertData();   
 })
+
+// Deletar Registro
+document.querySelector('.btExclude').addEventListener('click', ()=>{
+    deleteData(document.querySelector('.btExclude').id);
+})
+
 
 window.onload = readData();
 
@@ -12,7 +17,7 @@ window.onload = readData();
 // Função para inserir Dados
 function insertData() {
 
-    fetch('http://localhost/AgendaSticker/server/insert.php', {
+    fetch('http://localhost/ag2/server/insert.php', {
         method: 'post',
         body: new FormData(document.querySelector('#formInsert'))
 
@@ -24,7 +29,7 @@ function insertData() {
 
     }).then(response => {
         console.log(response)
-
+        readData();
     }).catch(err => {
         console.log(err)
     })
@@ -36,7 +41,7 @@ function insertData() {
 function readData() {
     
     document.querySelector('.row').innerHTML = '';
-    fetch('http://localhost/AgendaSticker/server/select.php', {
+    fetch('http://localhost/ag2/server/select.php', {
         method: 'get'
     })
         .then((res) => {
@@ -47,7 +52,6 @@ function readData() {
             throw new Error(response.statusText)
 
         }).then(response => {
-            console.log(response[0][1])
             
             response.forEach(registro => {
                 var arrayzinho = [];
@@ -57,7 +61,7 @@ function readData() {
                     console.log(el)
                 })
 
-                createCard(arrayzinho[1],arrayzinho[2],arrayzinho[3])
+                createCard(arrayzinho[0], arrayzinho[1],arrayzinho[2],arrayzinho[3])
             });
             
 
@@ -67,9 +71,32 @@ function readData() {
 
 }
 
+// Função deletar dados
+function deleteData(id2){
+    var data = {id : id2};
+    var fd = new FormData();
+    for(var id in data){ fd.append(id, data[id]);}
+   
+    fetch('http://localhost/ag2/server/delete.php',{
+        method: 'post',
+        body: fd
+    }).then(res=>{
+        if (res.status >= 200 && res.status < 300) {
+            return  res.text()
+        }
+        throw new Error(response.statusText)
+    }).then(response=>{
+        console.log(response);
+        readData();
+
+    }).catch(err => {
+        console.log(err)
+    })
+}
+
 
 // Função para criar Card
-function createCard(title, sub, text) {
+function createCard(id, title, sub, text) {
 
     var card_col = document.createElement('div');
     card_col.className = "col-md-0";
@@ -94,10 +121,18 @@ function createCard(title, sub, text) {
     card_text.innerHTML = text;
 
     var card_del_bt = document.createElement('a');
+    card_del_bt.id = id;    
     card_del_bt.className = "card-link";
     card_del_bt.innerHTML = "&times;";
     card_del_bt.style = "font-size: 1.5em; font-weight: 900;";
     card_del_bt.href = "#"
+    // Adicionando evento para executar a função showDeleteModal a boptão do card
+    card_del_bt.addEventListener('click', ()=>{
+        showDeleteModal()
+        document.querySelector('.btExclude').id = id;
+    })
+
+    // var id = document.createElement()
 
     card_body.appendChild(card_title);
     card_body.appendChild(card_subtitle);
@@ -123,3 +158,7 @@ function hideSpinner() {
 }
 
 
+// Função aparecer modal de delete
+function showDeleteModal(){ 
+    $('#exampleModal2').modal('show'); //see here usage
+}

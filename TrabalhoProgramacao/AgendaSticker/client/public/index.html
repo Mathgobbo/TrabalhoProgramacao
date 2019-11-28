@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-        <!-- Script -->
-        <script src="server.js" defer></script>
+    <!-- Script -->
+    <script src="server.js" defer></script>
 
 </head>
 
@@ -26,16 +26,16 @@
             Sticker</button>
     </nav>
     <!-- SPINNER -->
-<!-- 
+    
         <div class="spinner-border" role="status" style="z-index: 100; position: absolute; top: 50%; right: 50%; display: none;">
           <span class="sr-only">Loading...</span>
-        </div> -->
-     
+        </div>
+
 
 
     <!-- Container Stickers -->
     <div class="container">
-        <div class="row" >
+        <div class="row">
             <!-- <div class="col-md-0">
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
@@ -53,7 +53,7 @@
 
     </div>
 
-    <!-- Modal -->
+    <!-- Modal Registro -->
 
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -79,12 +79,36 @@
                             <label for="message-text" class="col-form-label">Descrição:</label>
                             <textarea class="form-control" id="message-text" name="descricao" required></textarea>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="submit">Send message</button>
-                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="submit">Enviar</button>
+                </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+ 
+
+    <!-- MODAL DELETE -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Deseja Excluir o registro?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+        
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary btExclude" >Excluir</button>
+                </div>
             </div>
         </div>
     </div>
